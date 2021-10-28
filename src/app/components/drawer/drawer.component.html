@@ -1,0 +1,101 @@
+<div class="main">
+  <mat-drawer-container (window:resize)="onResize($event)">
+    <mat-drawer
+      [mode]="innerWidth <= 768 ? 'over' : 'side'"
+      [opened]="isDrawerOpen"
+      (closedStart)="isDrawerOpen = false"
+    >
+      <button
+        mat-button
+        color="white"
+        (click)="isDrawerOpen = !isDrawerOpen"
+        class="close-btn"
+      >
+        <mat-icon aria-hidden="false" class="exp-panel-icon"> close </mat-icon>
+      </button>
+      <div class="drawer-wrapper">
+        <div>
+          <div class="drawer-header">
+            <h2>Personal Budget Planner</h2>
+          </div>
+
+          <div>
+            <mat-accordion>
+              <mat-expansion-panel
+                (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false"
+                expanded
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <div class="exp-panel-title">
+                      <mat-icon aria-hidden="false" class="exp-panel-icon"
+                        >person_outline</mat-icon
+                      >
+                      <span *ngIf="user">{{ user.name }}</span>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="exp-panel-body" *ngIf="monthBalance$ | async">
+                  <div>Current monthly balance:</div>
+                  <div
+                    class="money"
+                    [ngClass]="{
+                      positive: monthlyBalance > 0,
+                      low: monthlyBalance <= 0
+                    }"
+                  >
+                    {{ monthlyBalance | currency: "$" }}
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+
+          <div>
+            <hr class="separator" />
+          </div>
+
+          <div class="drawer-nav">
+            <mat-nav-list>
+              <mat-list-item
+                routerLinkActive="active"
+                [routerLink]="['/plan/month/', year, month]"
+                [class.active]="isActiveMonthRoute"
+              >
+                <a matLine>Monthly Balance</a>
+              </mat-list-item>
+              <mat-list-item
+                [routerLinkActive]="['']"
+                [routerLink]="['/plan/year', year]"
+                [class.active]="isActiveYearRoute ? 'active' : ''"
+              >
+                <a matLine>Yearly Balance</a>
+              </mat-list-item>
+            </mat-nav-list>
+          </div>
+        </div>
+
+        <div class="btn-logout">
+          <button mat-stroked-button color="accent" (click)="logout()">
+            Logout
+          </button>
+        </div>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="main-wrapper">
+        <mat-icon
+          aria-hidden="false"
+          (click)="isDrawerOpen = !isDrawerOpen"
+          *ngIf="!isDrawerOpen"
+          class="menu-btn"
+        >
+          menu
+        </mat-icon>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

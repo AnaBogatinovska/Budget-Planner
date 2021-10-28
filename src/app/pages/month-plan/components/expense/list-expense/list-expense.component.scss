@@ -1,0 +1,97 @@
+$primary: #3a506a;
+$secondary: #ff9100;
+$accent: #9c27b0;
+
+$dark: #333232;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+
+.expenses-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.expenses-table.added .mat-row {
+  background: #efefef;
+  transition: all 0.25s ease;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.table-header .title {
+  color: $primary;
+}
+
+.header-actions .filter {
+  margin-right: 16px;
+}
+
+.expenses-table {
+  width: 100%;
+}
+
+.edit-expense-btn .mat-icon {
+  font-size: 22px;
+}
+
+.no-data-row {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .mobile-label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+    color: $primary;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+  }
+  .mat-cell {
+    padding-left: 24px;
+  }
+
+  .table-header {
+    flex-wrap: wrap;
+    padding: 8px 16px;
+  }
+
+  .table-header .title {
+    flex: 1 0 100%;
+  }
+
+  .header-actions {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}

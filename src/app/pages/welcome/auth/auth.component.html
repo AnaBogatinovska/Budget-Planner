@@ -1,0 +1,16 @@
+<div class="background-layout">
+  <div class="landing-wrapper">
+    <div class="l-body">
+      <div>
+        <mat-card class="auth-group">
+          <nav mat-tab-nav-bar>
+            <a mat-tab-link *ngFor="let link of links" (click)="[onChange(link)]" [active]="activeLink == link">
+              {{ link }}
+            </a>
+          </nav>
+          <router-outlet></router-outlet>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

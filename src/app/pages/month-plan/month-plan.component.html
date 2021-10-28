@@ -1,0 +1,101 @@
+<div *ngIf="monthData$ | async as data" class="monthly-page">
+  <div class="m-page-header">
+    <h2>Plan for {{ utilities.monthName(month - 1) }} {{ year }}</h2>
+  </div>
+  <div class="monthly-info">
+    <mat-card class="monthly-info-card">
+      <mat-card-header>
+        <mat-card-title class="monthly-info-title">income</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-info-content">
+        <div
+          class="money"
+          [ngClass]="{
+            positive: data.income > 0,
+            low: data.income <= 0
+          }"
+        >
+          {{ utilities.amountCost(data.income) }}
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="action-btn">
+        <button mat-button (click)="openUserMonthPlanDialog('income')">
+          <div class="edit-btn">
+            <mat-icon aria-hidden="false" color="primary">edit</mat-icon>
+            <span>Edit</span>
+          </div>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="monthly-info-card">
+      <mat-card-header>
+        <mat-card-title class="monthly-info-title">budget</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-info-content">
+        <div
+          class="money"
+          [ngClass]="{
+            positive: data.budget > 0,
+            low: data.budget <= 0
+          }"
+        >
+          {{ utilities.amountCost(data.budget) }}
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="action-btn">
+        <div
+          class="action-btn-wrapper"
+          matTooltip="You must enter income first!"
+          [matTooltipDisabled]="data.income > 0"
+        >
+          <button
+            mat-button
+            (click)="openUserMonthPlanDialog('budget')"
+            [disabled]="data.income == 0"
+          >
+            <div class="edit-btn" [ngClass]="{ disable: data.income == 0 }">
+              <mat-icon aria-hidden="false" color="primary">edit</mat-icon>
+              <span>Edit</span>
+            </div>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="monthly-info-card">
+      <mat-card-header>
+        <mat-card-title class="monthly-info-title">balance</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-info-content">
+        <div
+          class="money"
+          [ngClass]="{
+            positive: monthlyBalance > 0,
+            low: monthlyBalance <= 0
+          }"
+        >
+          {{ monthlyBalance | currency: "$" }}
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="action-btn">
+        <div class="action-btn-wrapper" matTooltip="Info about balance">
+          <button mat-button disabled>
+            <div class="edit-btn info">
+              <mat-icon aria-hidden="false" color="primary">info</mat-icon>
+              <span></span>
+            </div>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="expenses">
+    <app-list-expense
+      [month]="month"
+      [year]="year"
+      [expenses]="data.expenses"
+    ></app-list-expense>
+  </div>
+</div>

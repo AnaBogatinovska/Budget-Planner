@@ -1,0 +1,137 @@
+<div class="mat-elevation-z8 expenses-section">
+  <div>
+    <div class="table-header">
+      <div class="title">
+        <h4>Expenses</h4>
+      </div>
+      <div class="header-actions">
+        <mat-form-field class="filter">
+          <mat-label>Filter</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Ex. ium"
+            #input
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          [routerLink]="['/plan/month/', this.year, this.month]"
+          fragment="create-expense"
+          (click)="openAddOrEditExpenseDialog('create-expense')"
+          [disabled]="!budget"
+        >
+          Add Expense
+        </button>
+      </div>
+    </div>
+    <mat-table
+      matSort
+      [dataSource]="dataSource"
+      class="expenses-table"
+      *ngIf="expenses$ | async"
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>No.</mat-header-cell>
+        <mat-cell *matCellDef="let element; let idx = index"
+          ><span class="mobile-label">No:</span>{{ idx + 1 }}</mat-cell
+        >
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Name</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element"
+          ><span class="mobile-label">Name:</span>{{ element.name }}</mat-cell
+        >
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="category" *ngIf="categories$ | async">
+        <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+        <mat-cell *matCellDef="let element"
+          ><span class="mobile-label">Category:</span
+          >{{ categoryName(element.categoryId) }}</mat-cell
+        >
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="cost">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Cost($)</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element"
+          ><span class="mobile-label">Cost($):</span
+          >{{ utilities.amountCost(element.amount) }}</mat-cell
+        >
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="payment date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Payment Day</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Payment Day:</span>
+          {{ element.day }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Actions column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            color="primary"
+            [routerLink]="['/plan/month/', year, month]"
+            [fragment]="'edit-expense-' + element.id"
+            (click)="
+              openAddOrEditExpenseDialog('edit-expense-' + element.id, element)
+            "
+          >
+            <mat-icon aria-hidden="false">edit_outline</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            [routerLink]="['/plan/month/', year, month]"
+            fragment="delete-expense"
+            (click)="openDeleteExpenseDialog(element)"
+          >
+            <mat-icon aria-hidden="false">delete_outline</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="no-data-row" *matNoDataRow>
+        <td
+          class="mat-cell"
+          colspan="12"
+          *ngIf="dataSource.filter && !dataSource.data.length"
+          class="centered-text"
+        >
+          No data matching the filter "<strong>{{ input.value }}</strong
+          >"
+        </td>
+        <td
+          class="mat-cell"
+          colspan="12"
+          class="centered-text"
+          *ngIf="!dataSource.filter && !dataSource.data.length"
+        >
+          No expenses available...
+        </td>
+      </tr>
+    </mat-table>
+  </div>
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons></mat-paginator>
+</div>

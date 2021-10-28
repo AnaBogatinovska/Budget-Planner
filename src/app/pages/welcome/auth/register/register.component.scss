@@ -1,0 +1,19 @@
+.action-btn {
+  display: flex;
+  margin-top: 24px;
+}
+
+.action-btn button {
+  flex: 1;
+}
+
+.auth-form {
+  min-width: 300px;
+}
+
+.auth-form .mat-form-field:first-child {
+  margin-top: 4px;
+}
+.auth-form .mat-form-field {
+  margin-bottom: 4px;
+}

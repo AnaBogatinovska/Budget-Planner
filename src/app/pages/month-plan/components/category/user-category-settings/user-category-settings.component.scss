@@ -1,0 +1,47 @@
+$primary: #3a506a;
+$secondary: #ff9100;
+$accent: #9c27b0;
+
+$dark: #333232;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+.add-expense-title {
+  color: $primary;
+}
+
+.add-expense-content.mat-dialog-content {
+  overflow: inherit;
+}
+
+.category-settings-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.category-settings-box .category-settings-body {
+  flex: 0 0 33%;
+}
+
+.category-settings-body {
+  display: flex;
+  align-items: center;
+  color: $primary;
+}
+.category-settings-body .mat-icon {
+  cursor: pointer;
+}
+
+.action-btns {
+  padding-right: 8px;
+}
+
+.action-btns .edit {
+  margin-right: 4px;
+}
+
+.cancel {
+  display: flex;
+  justify-content: flex-end;
+}

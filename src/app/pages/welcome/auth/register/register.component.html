@@ -1,0 +1,74 @@
+<form
+  action=""
+  class="auth-form"
+  (ngSubmit)="onSubmitRegister()"
+  [formGroup]="formRegister"
+>
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput type="text" id="name" formControlName="name" />
+    <mat-error *ngIf="isNameRequired()">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      type="email"
+      email
+      formControlName="email"
+      [errorStateMatcher]="matcher"
+    />
+
+    <mat-error *ngIf="isEmailValid()">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="isEmailRequired()">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="password"
+      minlength="8"
+      formControlName="password"
+      [errorStateMatcher]="matcher"
+    />
+    <mat-error *ngIf="isPasswordRequired()">
+      Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="isPasswordValid()">
+      Password should have at least <strong>1 number</strong>,
+      <strong>1 uppercase</strong>, <strong>1 lowercase</strong> and
+      <strong>1 special character</strong>
+    </mat-error>
+    <mat-error *ngIf="isPasswordShort()">
+      Password should be at least <strong>8 characters</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Confirm password</mat-label>
+    <input
+      matInput
+      type="password"
+      formControlName="confirmPassword"
+      [errorStateMatcher]="matcher"
+    />
+    <mat-error *ngIf="isPasswordConfrimRequired()">
+      Confirmation password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="isPasswordMatched()">
+      Please match <strong>password</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="action-btn">
+    <button mat-raised-button color="accent">REGISTER</button>
+  </div>
+</form>

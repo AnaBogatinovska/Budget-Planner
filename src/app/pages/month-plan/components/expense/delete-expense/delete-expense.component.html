@@ -1,0 +1,23 @@
+<h1 mat-dialog-title class="delete-expense-title">
+  Are you sure you want to delete this expense?
+</h1>
+<div mat-dialog-content class="delete-expense-content">
+  <div class="del-expense-name">Name: {{ data.expense.name }}</div>
+  <div
+    class="money"
+    [ngClass]="{
+      positive: data.expense.amount > 0,
+      low: data.expense.amount == 0
+    }"
+  >
+    Cost($): {{ utilities.amountCost(data.expense.amount) }}
+  </div>
+  <div mat-dialog-actions class="form-actions">
+    <div>
+      <button mat-button mat-dialog-close color="primary">Cancel</button>
+      <button mat-raised-button color="accent" (click)="onDeleteExpense()">
+        OK
+      </button>
+    </div>
+  </div>
+</div>

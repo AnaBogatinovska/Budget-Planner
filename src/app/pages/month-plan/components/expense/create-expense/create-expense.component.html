@@ -1,0 +1,109 @@
+<h1 mat-dialog-title class="add-expense-title">Add expense</h1>
+<div mat-dialog-content class="add-expense-content">
+  <form (ngSubmit)="onAddExpense()" [formGroup]="expenseForm">
+    <div class="form-field">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="name"
+          formControlName="name"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-field category">
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select
+          matInput
+          formControlName="category"
+          name="category"
+          required
+        >
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let c of categories$ | async" [value]="c.id">
+            {{ c.name }}
+          </mat-option>
+          <mat-optgroup label="My categories">
+            <mat-option
+              *ngFor="let c of userCategories$ | async"
+              [value]="c.id"
+            >
+              {{ c.name }}
+            </mat-option>
+            <button mat-button (click)="openUserCategoriesSettingsDialog()">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </mat-optgroup>
+        </mat-select>
+        <mat-error *ngIf="expenseForm.get('category').hasError('required')"
+          >Please choose category!</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="category-btn">
+      <div class="add-category-btn">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="openCreateCategoryDialog(0)"
+        >
+          <div class="category-btn-wrapper">
+            <mat-icon aria-hidden="false" class="exp-panel-icon">add</mat-icon
+            ><span>add category</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <mat-form-field>
+        <mat-label>Cost</mat-label>
+        <input
+          matInput
+          type="number"
+          name="amount"
+          min="1"
+          [value]="expenseForm.value.amount || 1"
+          formControlName="amount"
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <mat-form-field>
+        <input
+          #minmaxInput
+          matInput
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="minmaxvalidation"
+          readonly
+          placeholder="Pick a date"
+          name="day"
+          formControlName="day"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="minmaxvalidation">
+        </mat-datepicker-toggle>
+        <mat-datepicker #minmaxvalidation></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="form-actions">
+      <div>
+        <button mat-button mat-dialog-close color="primary">Cancel</button>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="!expenseForm.valid"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

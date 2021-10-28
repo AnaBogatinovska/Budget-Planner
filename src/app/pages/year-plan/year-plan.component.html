@@ -1,0 +1,89 @@
+<div class="yearly-page">
+  <div style="text-align: center; position: relative">
+    <mat-form-field class="input-picker">
+      <button
+        mat-icon-button
+        matPrefix
+        (click)="minusYear()"
+        [disabled]="selectedYear == year - 25"
+      >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <input
+        type="number"
+        matInput
+        [value]="selectedYear"
+        readonly
+        class="year-picker"
+        (click)="isYearPickerOpen = !isYearPickerOpen"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="plusYear()"
+        [disabled]="selectedYear == year"
+      >
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+      <div class="year-options" *ngIf="isYearPickerOpen">
+        <button
+          mat-button
+          *ngFor="let year of yearOpts()"
+          (click)="onYearSelected(year)"
+          class="opt"
+        >
+          {{ year }}
+        </button>
+      </div>
+    </mat-form-field>
+  </div>
+  <div class="yearly-content" *ngIf="yearData$ | async as data">
+    <div class="card-box" *ngFor="let m of data | keyvalue; let idx = index">
+      <div class="card-body">
+        <mat-card class="yearly-card mat-elevation-z0">
+          <mat-card-header>
+            <mat-card-title
+              >{{ utilities.monthName(idx) }} {{ selectedYear }}</mat-card-title
+            >
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="month-info">
+              <span>Budget:</span>
+              <span
+                class="money"
+                [ngClass]="{
+                  positive: data[idx + 1].budget > 0,
+                  low: data[idx + 1].budget <= 0
+                }"
+                >{{ utilities.amountCost(data[idx + 1].budget) }}</span
+              >
+            </div>
+            <div class="month-info">
+              <span>Balance:</span>
+              <span
+                class="money"
+                [ngClass]="{
+                  positive: data[idx + 1].balance > 0,
+                  low: data[idx + 1].balance <= 0
+                }"
+                >{{ utilities.amountCost(data[idx + 1].balance) }}</span
+              >
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions class="m-box-action-btn">
+            <button
+              class="details-btn"
+              mat-flat-button
+              color="accent"
+              [routerLink]="['/plan/month', selectedYear, idx + 1]"
+            >
+              DETAILS
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

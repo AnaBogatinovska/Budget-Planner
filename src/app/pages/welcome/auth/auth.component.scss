@@ -1,0 +1,48 @@
+.auth-group {
+  min-height: 400px;
+}
+
+.action-btn {
+  display: flex;
+  margin-top: 24px;
+}
+
+.action-btn button {
+  flex: 1;
+}
+
+.background-layout {
+  background-image: url("/assets/images/bg-img.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  z-index: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.background-layout::before {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  left: 0;
+  top: 0;
+  content: "";
+}
+
+.landing-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+.landing-wrapper .l-body {
+  text-align: center;
+}

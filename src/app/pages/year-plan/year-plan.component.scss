@@ -1,0 +1,106 @@
+$primary: #3a506a;
+$secondary: #ff9100;
+$accent: #9c27b0;
+
+$dark: #333232;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+
+.yearly-content {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.card-box {
+  flex: 0 0 100%;
+  display: flex;
+  @media (min-width: 422px) {
+    flex: 0 0 50%;
+  }
+  @media (min-width: 768px) {
+    flex: 0 0 33%;
+  }
+  @media (min-width: 1365px) {
+    flex: 0 0 25%;
+  }
+}
+
+.card-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+}
+
+.yearly-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  color: $primary;
+  background-color: transparent;
+  box-shadow: 0px 0px 11px -4px $primary;
+}
+
+.yearly-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.yearly-page .month-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+//year picker
+
+.year-picker {
+  text-align: center;
+  font-weight: 600;
+  color: $primary;
+  cursor: pointer;
+}
+
+.input-picker {
+  position: relative;
+}
+
+.year-options {
+  position: absolute;
+  top: 32px;
+  left: -30%;
+  right: -30%;
+  background: $primary;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.year-options .opt {
+  flex: 0 0 25%;
+}
+
+.m-box-action-btn {
+  margin: 0 !important;
+}
+
+.details-btn {
+  padding: 1px 8px;
+}
+
+.details-btn .mat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button {
+  line-height: 24px;
+  float: right;
+}

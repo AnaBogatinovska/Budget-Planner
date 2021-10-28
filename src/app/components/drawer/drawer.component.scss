@@ -1,0 +1,148 @@
+$primary: #3a506a;
+$secondary: #ff9100;
+$accent: #9c27b0;
+
+$dark: #333232;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+.main {
+  height: 100%;
+}
+
+.mat-drawer {
+  background-image: url("../../../assets/images/sidebar-2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 330px;
+  box-shadow: 0 16px 38px -12px rgb(0 0 0 / 56%), 0 4px 25px 0 rgb(0 0 0 / 12%),
+    0 8px 10px -5px rgb(0 0 0 / 20%);
+  background-position: 50%;
+  overflow-y: unset;
+  padding: 25px 0;
+}
+
+.mat-drawer::before {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  left: 0;
+  top: 0;
+  content: "";
+}
+
+.mat-drawer-container {
+  height: 100%;
+}
+
+//Drawer inner
+
+.drawer-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.drawer-header {
+  margin-bottom: 16px;
+}
+
+.drawer-header h2 {
+  text-align: center;
+  color: #f0f0f0;
+}
+
+.mat-expansion-panel {
+  background-color: transparent;
+  color: #f0f0f0;
+  box-shadow: none;
+}
+
+.mat-expansion-panel
+  .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled="true"]),
+.mat-expansion-panel
+  .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled="true"]),
+.mat-expansion-panel:not(.mat-expanded)
+  .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.exp-panel-title {
+  display: flex;
+  align-items: flex-end;
+  color: #f0f0f0;
+}
+
+.exp-panel-icon {
+  color: #f0f0f0;
+}
+
+.exp-panel-title span {
+  margin-left: 16px;
+}
+
+.exp-panel-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.separator {
+  color: #f0f0f0;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.drawer-nav .mat-nav-list .mat-list-item {
+  color: #f0f0f0;
+  font-size: 15px;
+}
+
+.mat-list-text {
+  font-size: 14px !important;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.25s ease-in-out;
+  color: $secondary !important;
+}
+
+//button stroke border
+
+.mat-stroked-button:not(.mat-button-disabled) {
+  border-color: $secondary;
+}
+
+.btn-logout {
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  right: -10px;
+  top: 0;
+}
+
+.main-wrapper .mat-icon {
+  color: $primary;
+  cursor: pointer;
+}
+
+.main-wrapper {
+  padding: 0 16px;
+  height: 100%;
+}
+
+.menu-btn {
+  position: absolute;
+  top: 6px;
+  left: 16px;
+  cursor: pointer;
+  z-index: 10;
+}

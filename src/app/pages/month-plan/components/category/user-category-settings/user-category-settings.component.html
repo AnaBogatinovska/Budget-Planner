@@ -1,0 +1,30 @@
+<h1 mat-dialog-title class="add-expense-title">My categories</h1>
+<div mat-dialog-content class="add-expense-content">
+  <div class="category-settings-box">
+    <div *ngFor="let c of categories" class="category-settings-body">
+      <div class="action-btns">
+        <button
+          mat-icon-button
+          color="warn"
+          type="button"
+          (click)="openDeleteCategoryDialog(c.id)"
+        >
+          <mat-icon aria-hidden="false">delete_outline</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          type="button"
+          (click)="openCreateCategoryDialog(c.id)"
+        >
+          <mat-icon aria-hidden="false">edit_outline</mat-icon>
+        </button>
+      </div>
+      <div class="name">{{ c.name }}</div>
+    </div>
+  </div>
+
+  <div class="cancel">
+    <button mat-button mat-dialog-close color="primary">Cancel</button>
+  </div>
+</div>

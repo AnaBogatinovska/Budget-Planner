@@ -1,0 +1,21 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 300px;
+}
+
+.action-btn {
+  display: flex;
+  margin-top: 24px;
+}
+
+.action-btn button {
+  flex: 1;
+}
+.auth-form .mat-form-field:first-child {
+  margin-top: 4px;
+}
+.auth-form .mat-form-field {
+  margin-bottom: 4px;
+}

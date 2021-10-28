@@ -1,0 +1,31 @@
+$primary: #3a506a;
+$secondary: #ff9100;
+$accent: #9c27b0;
+
+$dark: #333232;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+.add-expense-title {
+  color: $primary;
+}
+
+.add-expense-content.mat-dialog-content {
+  overflow: inherit;
+}
+
+.form-field {
+  display: flex;
+}
+
+.form-field .mat-form-field {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+}

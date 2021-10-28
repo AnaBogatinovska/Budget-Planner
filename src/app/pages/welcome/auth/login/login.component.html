@@ -1,0 +1,31 @@
+<form action="" class="auth-form" (ngSubmit)="onSubmitLogin()" >
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" email  [formControl]="emailFormControl" [errorStateMatcher]="matcher"/>
+  
+      <mat-error *ngIf="isEmailValid()">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="isEmailRequired()">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [formControl]="passwordFormControl" [errorStateMatcher]="matcher"/>
+      <mat-error *ngIf="isPasswordRequired()">
+        Password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="isPasswordValid()">
+        Password is <strong>invalid</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="action-btn">
+      <button type="submit" mat-raised-button color="accent">
+        <span *ngIf="!spinner">LOGIN</span> 
+        <div *ngIf="spinner" class="loader"></div>
+      </button>
+    </div>
+  </form>
+  

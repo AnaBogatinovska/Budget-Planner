@@ -1,0 +1,58 @@
+$primary: #3a506a;
+$secondary: #ff9100;
+$accent: #9c27b0;
+
+$dark: #333232;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+.add-expense-title {
+  color: $primary;
+}
+
+.add-expense-content.mat-dialog-content {
+  overflow: inherit;
+}
+
+.form-field {
+  display: flex;
+}
+
+.form-field .mat-form-field {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+}
+
+.form-field.category .mat-form-field-wrapper {
+  padding: 0;
+}
+
+.add-category-btn {
+  width: 100%;
+  text-align: right;
+}
+
+.category-btn {
+  margin-top: -18px;
+  font-size: 12px;
+}
+.add-category-btn .category-btn-wrapper {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.add-category-btn .mat-button {
+  font-size: 13px;
+}
+.add-category-btn .mat-icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
