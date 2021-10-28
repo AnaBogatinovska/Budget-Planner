@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Register } from '../../../../store/auth/auth.actions';
 import { AuthErrorStateMatcher } from 'src/app/services/error-state-matcher/auth-error-state-matcher';
@@ -26,7 +26,26 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.formRegister = this.formBuilder.group({
+    this.formRegister = this.createFormBuilder();
+  }
+
+  private matchPassword(control: FormControl): { [s: string]: boolean } {
+    if (this.formRegister && this.formRegister.value.password) {
+      if (this.formRegister.value.password !== control.value) {
+        return { matched: true };
+      }
+    }
+    return null;
+  }
+
+  public onSubmitRegister(): void {
+    if (this.formRegister.valid) {
+      this.store.dispatch(new Register(this.formRegister.value));
+    }
+  }
+
+  private createFormBuilder(): FormGroup {
+    return this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: [
@@ -43,21 +62,6 @@ export class RegisterComponent implements OnInit {
         [Validators.required, this.matchPassword.bind(this)],
       ],
     });
-  }
-
-  private matchPassword(control: FormControl): { [s: string]: boolean } {
-    if (this.formRegister && this.formRegister.value.password) {
-      if (this.formRegister.value.password !== control.value) {
-        return { matched: true };
-      }
-    }
-    return null;
-  }
-
-  public onSubmitRegister(): void {
-    if (this.formRegister.valid) {
-      this.store.dispatch(new Register(this.formRegister.value));
-    }
   }
 
   public isNameRequired(): boolean {

@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, of } from 'rxjs';
 import { NotificationService } from 'src/app/notification.service';
 import { AuthLoginResponseData } from 'src/app/models/auth/auth-login-response-data.interface';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Injectable()
 export class AuthEffects {
@@ -18,7 +19,8 @@ export class AuthEffects {
     private http: HttpClient,
     private router: Router,
     private actions$: Actions,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) {}
 
   // effect for register
@@ -41,6 +43,10 @@ export class AuthEffects {
                   name: registerAction.payload.name,
                 },
               };
+              this.authService.loginAfterRegister(
+                registerAction.payload.email,
+                registerAction.payload.password
+              );
 
               return this.handleAuthentication(data);
             }),
