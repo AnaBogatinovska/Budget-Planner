@@ -5,6 +5,7 @@ Technologies and tools used for the frontend part are:
   - Angular 12
   - RxJs and NgRx (state management)
   - Angular Material
+
 Backend: 
   - NodeJS
   - Typescript
